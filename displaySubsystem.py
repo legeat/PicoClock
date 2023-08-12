@@ -128,7 +128,7 @@ class DISPLAYSUBSYSTEM:
         else:
             line3.x = 51
             line3.y = 22
-
+#autolight set page
     def onOffPage(self, line2, line3, _selectSettingOptions,_autoLightFlag):
         line2.x = 4
         line2.y = 13
