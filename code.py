@@ -1,6 +1,6 @@
 import adafruit_display_text.label
 from adafruit_bitmap_font import bitmap_font
-from board import *
+import board
 import displayio
 import framebufferio
 import rgbmatrix
@@ -74,7 +74,7 @@ def checkLightSensor():
     if autoLightFlag == 1:
         lightSensorValue = get_voltage()
         if lightSensorValue > 2800:
-            display.brightness = 0
+            display.brightness = 1
         else:
             display.brightness = 1
 
@@ -195,6 +195,8 @@ def keyExitProcessingFunction():
     pageID -= 1
     if pageID < 0:
         pageID = 1
+        #firstEnteringPageFlag = 1
+
 
 def keyProcessing(keyValue):
     global keyMenuValue, keyDownValue, keyUpValue
@@ -257,3 +259,5 @@ while True:
         line1.y = 4
         line1.text = ""
         showSystem.onOffPage(line2, line3, selectSettingOptions, autoLightFlag)
+
+        
