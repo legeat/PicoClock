@@ -7,7 +7,6 @@ import adafruit_display_text.label
 import math
 import time
 
-
 days = ("Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця", "Субота","Неділя")
 
 i2c = busio.I2C(board.GP7,board.GP6)  # uses board.SCL and board.SDA
@@ -50,19 +49,18 @@ def _ymd2ord(year, month, day):
 #DateTime Display
 class DISPLAYSUBSYSTEM:
     def showDateTimePage(self,line1,line2,line3):
-        while True:
-            t = rtc.datetime  
-            date =  "%02d" % t.tm_mday + '-' + "%02d" % t.tm_mon + '-' + "%04d" % t.tm_year
-            dayOfTime = "%02d" % t.tm_hour + ':' + "%02d" % t.tm_min + ':' + "%02d" % t.tm_sec
-            line1.text = date
-            line2.text = dayOfTime
-            line3.text=days[int(t.tm_wday)]
-            line1.x = 0
-            line1.y = 4
-            line2.x = 0
-            line2.y = 13
-            line3.x = 0
-            line3.y = 22
+        t = rtc.datetime  
+        date =  "%02d" % t.tm_mday + '-' + "%02d" % t.tm_mon + '-' + "%04d" % t.tm_year
+        dayOfTime = "%02d" % t.tm_hour + ':' + "%02d" % t.tm_min + ':' + "%02d" % t.tm_sec
+        line1.text = date
+        line2.text = dayOfTime
+        line3.text=days[int(t.tm_wday)]
+        line1.x = 0
+        line1.y = 4
+        line2.x = 0
+        line2.y = 13
+        line3.x = 0
+        line3.y = 22
 
 #List of pages
     def showSetListPage(self,line1,line2,_selectSettingOptions):
@@ -128,7 +126,7 @@ class DISPLAYSUBSYSTEM:
         else:
             line3.x = 51
             line3.y = 22
-#autolight set page
+
     def onOffPage(self, line2, line3, _selectSettingOptions,_autoLightFlag):
         line2.x = 4
         line2.y = 13
@@ -155,4 +153,3 @@ class DISPLAYSUBSYSTEM:
             w = (_ymd2ord(_dateTemp[0],_dateTemp[1], _dateTemp[2]) + 6) % 7
             t = time.struct_time((_dateTemp[0], _dateTemp[1], _dateTemp[2], getTime.tm_hour, getTime.tm_min, getTime.tm_sec, w, -1, -1))
             rtc.datetime = t
-            
